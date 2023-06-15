@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "5397e5b0-8d5b-4fea-b885-8f297182746b",
+		"name": "dummyRestApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20038507"
+	},
+	"item": [
+		{
+			"name": "Get Employees Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"////Test Status Code",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test Content Type to be \"application/json\"",
+							"pm.test(\"Content type is JSON\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+							"});",
+							"",
+							"//Test Response Time",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(900);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/v1/employee",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verify the response status code",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test Reponse ",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.nested;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/v1/create",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Employee Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verify the response status is 200 OK",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Verify the response contains the expected data",
+							"pm.test(\"Response has expected data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"success\");",
+							"    pm.expect(jsonData.data).to.be.an(\"object\");",
+							"    pm.expect(jsonData.data.id).to.eql(1);",
+							"    pm.expect(jsonData.data.employee_name).to.eql(\"Tiger Nixon\");",
+							"    pm.expect(jsonData.data.employee_salary).to.eql(320800);",
+							"    pm.expect(jsonData.data.employee_age).to.eql(61);",
+							"    pm.expect(jsonData.data.profile_image).to.eql(\"\");",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully! Record has been fetched.\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/v1/employee/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test Status Code",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test Response Body",
+							"pm.test(\"Response has expected properties and values\", function () {",
+							"    pm.response.to.have.jsonBody(\"status\", \"success\");",
+							"    pm.response.to.have.jsonBody(\"data\", []);",
+							"    pm.response.to.have.jsonBody(\"message\", \"Successfully! Record has been updated.\");",
+							"});",
+							"",
+							"//Test Response Time",
+							"pm.test(\"Response time is within acceptable range\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(900);",
+							"});",
+							"",
+							"//Test Request Headers",
+							"pm.test(\"Response has expected headers\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/public/api/v1/update/21",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"public",
+						"api",
+						"v1",
+						"update",
+						"21"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
