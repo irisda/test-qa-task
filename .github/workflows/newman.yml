@@ -17,4 +17,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run Newman
-        run: newman run testQARequests.json
+        run: newman run testQARequests.json -e DUMMYENV.postman_environment.json
